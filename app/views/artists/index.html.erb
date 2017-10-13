@@ -1,0 +1,15 @@
+<h1>Artists</h1>
+<br>
+<br>
+<hr>
+<h3>This page displays a list of all our currently listed artists!</h3>
+<br>
+<br>
+<hr>
+<p>"Not enough artists for you? Make an account and add away!"</p>
+<br>
+<br>
+<hr>
+<% @artists.each do |artist| %>
+  <p><%= artist.name %></p>
+  <% end %>
