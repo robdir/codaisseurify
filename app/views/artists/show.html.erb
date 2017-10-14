@@ -1,12 +1,20 @@
 <h1><%= @artist.name %></h1>
 <br>
 <hr>
+<%= @artist.photos.find_each do |photo| %>
+<%= image_tag photo.image %>
+<% end %>
+<br>
+<hr>
 <p> About: <%= @artist.bio %> </p>
 <br>
 <p> Genre: <%= @artist.genre %> </p>
 <br>
 <p> Formed in: <%= @artist.formed %> </p>
 <br>
-<p> Songs: <br> <%= @songs.find_each do |song| %> </p>
-<ul> <li> <%= song.name %> </li> </ul>
+<p> Our favourite songs (and the related albums): <br>
+  <%= @songs.find_each do |song, album| %> </p>
+<ul> <li> "<%= song.name %>" -- ("<%= song.album %>") </li> </ul>
 <% end %>
+<br>
+<br>

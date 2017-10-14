@@ -1,3 +1,4 @@
+Photo.destroy_all
 User.destroy_all
 Artist.destroy_all
 Song.destroy_all
@@ -10,6 +11,13 @@ artist2 = Artist.create(name: "The Pharcyde", formed: 1989, bio: "Infectious rhy
 
 artist3 = Artist.create(name: "Porcupine Tree", formed: 1987, bio: "Brooding, melancholy and heavy, this British progressive outfit gathered a huge cult following
   several album releases - cultivating a new and ingenious sound and breathing new life into a nostalgic genre.' ", genre: "Progressive Rock")
+
+photo1 = Photo.create!(remote_image_url: "http://res.cloudinary.com/dbk0w1uqs/image/upload/v1508004350/allman-brothers-band_nwponq.jpg", artist: artist1)
+
+photo2 = Photo.create!(remote_image_url: "http://res.cloudinary.com/dbk0w1uqs/image/upload/v1508004345/pharcyde_tkhhqv.png", artist: artist2)
+
+photo1 = Photo.create!(remote_image_url: "http://res.cloudinary.com/dbk0w1uqs/image/upload/v1508004324/Porcupine-Tree_kb74pt.jpg", artist: artist3)
+
 
   Song.create!([
     { name: "Jessica", album: "Brothers and Sisters", artist: artist1},
