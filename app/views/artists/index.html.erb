@@ -2,14 +2,14 @@
 <br>
 <br>
 <hr>
-<h3>This page displays a list of all our currently listed artists!</h3>
 <br>
-<br>
-<hr>
-<p>"Not enough artists for you? Make an account and add away!"</p>
-<br>
+<h3>This page displays a list of all our current artists!</h3>
+<p>Not enough artists for you? Make an account and add away!</p>
 <br>
 <hr>
+<br>
+<ul>
 <% @artists.each do |artist| %>
-  <p><%= artist.name %></p>
+  <li><p><%= link_to artist.name, artist_path(artist.id) %></p></li>
   <% end %>
+</ul>
