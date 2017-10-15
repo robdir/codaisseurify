@@ -5,4 +5,8 @@ class Artist < ApplicationRecord
 
   accepts_nested_attributes_for :songs
 
+  validates :name, presence: true
+  validates :formed, presence: true
+  validates :bio, presence: true, length: { maximum: 500 }
+
 end

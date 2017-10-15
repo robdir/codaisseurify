@@ -14,6 +14,11 @@ class ArtistsController < ApplicationController
     @photos = @artist.photos
   end
 
+  def create
+    @artist = Artist.find(params[:id])
+    @songs = @artist.songs
+  end
+
 #Action for deleting an artist and associated data
 
   def destroy
