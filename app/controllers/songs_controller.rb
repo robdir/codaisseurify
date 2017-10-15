@@ -1,41 +1,36 @@
 class SongsController < ApplicationController
 
-def index
-  @artists = Artist.all
+def index;
 end
 
 def show;
-  @songs = Song.find(params[:id])
-  @songs = @artist.songs
 end
 
 def new
   @song = Song.new
 end
 
-#Needed? This is all here, but the song must be then saved to the artists data.
+def create
+  @artist = Artist.find(params[:id])
+   @song = @artist.songs.new(song_params)
 
-# def create
-#  @song = Song.new(song_params)
-#     if @song.save
-#       redirect_to artists_path(@artist)
-#     else
-#       render "new"
-#     end
-# end
+  if @song.save
+     redirect_to @artist, notice: "Song added to this artist!"
+   else
+     render :new
+   end
+ end
 
-def update
-  @songs = Song.find(params[:id])
+ def destroy
+   @song = Song.find(params[:id])
+   @song.destroy
+   redirect_to artists_path
+ end
 
-  if @song.update_attributes ( song_params )
-    redirect_to artists_path
-  else
-    render 'edit'
-  end
-end
+private
 
 def song_params
-  song_params = params.require(:song).permit(:name, :album)
+  song_params = params.require(:song).permit(:name, :album, :artist_id)
 end
 
 end

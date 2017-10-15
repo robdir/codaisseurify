@@ -3,6 +3,11 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  resources :artists
+
+  resources :artists do
   resources :songs
+end
+
+resources :songs
+
 end

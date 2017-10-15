@@ -12,17 +12,30 @@
 <br>
 <p> Formed in: <%= @artist.formed %> </p>
 <br>
-<p> Our favourite songs (and the related albums): <br>
-  <%= @songs.find_each do |song, album| %> </p>
-<ul> <li> "<%= song.name %>" -- ("<%= song.album %>") </li> </ul>
-<% end %>
+<hr>
+
+  <p>Our favourite songs (and the related albums): </p>
+  <br>
+  <ul>
+    <% @songs.each do |song, album| %>
+      <li>"<%= song.name %>" -- "<%= song.album %>" <br> </li>
+      <%= link_to 'Delete', artist_song_path(@artist, song), method: :delete, data: { confirm: "Are you sure you want to delete this song?" } %>
+    <% end %>
+  </ul>
+
+
+<br>
+<hr>
+
+<%= link_to "[Add a new song to #{@artist.name}]",
+new_artist_song_path(@artist) %>
+
+<hr>
+<%= link_to "[Not a fan of #{@artist.name}? Click here to delete them from our site.]",
+artist_path(@artist.id), method: :delete, data: { confirm: "Are you sure?!"} %>
 <br>
 <br>
 
-<%= link_to "[Add a new song to #{@artist.name}]", new_song_path %>
-<br>
-<br>
-<br>
 <%= link_to "Back", artists_path, class: "btn btn-default" %>
 <br>
 <br>

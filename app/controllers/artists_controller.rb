@@ -1,8 +1,12 @@
 class ArtistsController < ApplicationController
 
+#Action for artist index
+
   def index
     @artists = Artist.all
   end
+
+#Action for artists show page
 
   def show
     @artist = Artist.find(params[:id])
@@ -10,26 +14,11 @@ class ArtistsController < ApplicationController
     @photos = @artist.photos
   end
 
-#WIP
+#Action for deleting an artist and associated data
 
-  def edit
+  def destroy
     @artist = Artist.find(params[:id])
-    @songs = @artist.songs
+    @artist.destroy
+    redirect_to artists_path
   end
-
-  def update
-    @artist = Artist.find(params[:id])
-    @songs = @artist.songs
-
-    if @artist.update_attributes ( artist_params )
-      redirect_to @artist
-    else
-      render 'edit'
-    end
-  end
-
-def artist_params
-  params.require(:artist).permit(:songs)
-end
-
 end

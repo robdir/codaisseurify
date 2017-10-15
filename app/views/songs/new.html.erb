@@ -1,8 +1,8 @@
-<h3> Add a new song </h3>
+<h3> Add a new song to this artist </h3>
 <br>
 <br>
 
-<%= form_for @song do |f| %>
+<%= form_for [@artist, @song] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 
