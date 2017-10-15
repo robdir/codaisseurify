@@ -10,4 +10,26 @@ class ArtistsController < ApplicationController
     @photos = @artist.photos
   end
 
+#WIP
+
+  def edit
+    @artist = Artist.find(params[:id])
+    @songs = @artist.songs
+  end
+
+  def update
+    @artist = Artist.find(params[:id])
+    @songs = @artist.songs
+
+    if @artist.update_attributes ( artist_params )
+      redirect_to @artist
+    else
+      render 'edit'
+    end
+  end
+
+def artist_params
+  params.require(:artist).permit(:songs)
+end
+
 end
