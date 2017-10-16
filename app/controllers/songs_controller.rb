@@ -11,7 +11,7 @@ def new
 end
 
 def create
-  @artist = Artist.find(params[:id])
+  @artist = Artist.find(params[:artist_id])
    @song = @artist.songs.new(song_params)
 
   if @song.save
