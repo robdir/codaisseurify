@@ -65,6 +65,8 @@ group :test do
   gem 'capybara', '~> 2.9', '>= 2.9.1'
 end
 
+gem 'active_model_serializers', '~> 0.10.0'
+
 # Use Bootstrap for styling
 gem 'bootstrap-sass', '~> 3.3.6'
 
