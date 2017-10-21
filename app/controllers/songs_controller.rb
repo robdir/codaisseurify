@@ -1,11 +1,5 @@
 class SongsController < ApplicationController
 
-def index;
-end
-
-def show;
-end
-
 def new
   @song = Song.new
 end

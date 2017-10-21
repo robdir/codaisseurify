@@ -7,7 +7,7 @@ RSpec.describe Artist, type: :model do
   end
 
 
-  describe "association with song"
+  describe "association with song" do
     let(:artist) { create :artist }
     let!(:song)  { create :song, artist: artist}
 
@@ -19,4 +19,12 @@ RSpec.describe Artist, type: :model do
       expect(artist.songs).to include(song2)
 
     end
+  end
+  
+  describe "dependent destroy relation" do
+
+    it { is_expected.to have_many(:songs).dependent(:destroy)}
+    it { is_expected.to have_many(:photos).dependent(:destroy)}
+
+  end
 end
