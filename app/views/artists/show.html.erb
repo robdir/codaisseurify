@@ -17,22 +17,15 @@
   <p>Our favourite songs (and the related albums): </p>
   <br>
 
-<div class="container", data-id="<%= @artist.id %>">
-  <ul class="list-group">
-    <% @songs.each do |song, album| %>
-      <li class="list-item-group", data-id="<%= song.id %>"> "<%= song.name %>" -- "<%= song.album %>" <br> </li>
-      <%= link_to 'Delete', artist_song_path(@artist, song), method: :delete, data: { confirm: "Are you sure you want to delete this song?" } %>
-    <% end %>
-  </ul>
-</div>
+<%= render "songlist" %>
 <br>
 <hr>
-
+<br>
+<p> Add a new song to <%= "#{@artist.name}" %> </p>
+<br>
 <%= render "form" %>
 <br>
 <br>
-<%= link_to "[Add a new song to #{@artist.name}]",
-new_artist_song_path(@artist) %>
 
 <hr>
 <%= link_to "[Not a fan of #{@artist.name}? Click here to delete them from our site.]",
