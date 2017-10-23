@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   resources :songs
 end
 
-resources :songs
+namespace :api do
+  resources :artists do
+    resources :songs
+    end
+  end
 
 end
