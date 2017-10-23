@@ -19,6 +19,17 @@ class Api::SongsController < ApplicationController
      end
    end
 
+   def destroy
+     @artist = Artist.find(params[:artist_id])
+     @song = Song.find(params[:id])
+     @song.destroy
+
+     render status: 200, json: {
+       message: "Song deleted"
+     }.to_json
+     redirect_to @artist
+   end
+
    private
 
    def song_params

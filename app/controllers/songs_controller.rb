@@ -14,15 +14,11 @@ def create
   @artist = Artist.find(params[:artist_id])
    @song = @artist.songs.new(song_params)
 
-  respond_to do |format|
     if @song.save
-        format.html { redirect_to @artist, notice: "Song added to this artist!" }
-        format.json { render :show, status: :created, location: @artist }
+      redirect_to @artist, notice: "Song added to this artist!"
      else
-       format.html { render artist_path }
-       format.json { render json: @artist.errors, status: :unprocessable_entity }
-     end
-    end
+       redirect_to @artist.id, notice: "Song could not be created :( )"
+      end
    end
 
  def destroy
@@ -32,10 +28,10 @@ def create
    redirect_to @artist
  end
 
-private
+ private
 
-def song_params
+  def song_params
   song_params = params.require(:song).permit(:name, :album, :artist_id)
-end
+  end
 
 end
