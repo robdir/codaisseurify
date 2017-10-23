@@ -1,4 +1,4 @@
-<h1><%= @artist.name %></h1>
+<h1  data-id="<%= @artist.id %>" ><%= @artist.name %></h1>
 <br>
 <hr>
 <%= @artist.photos.find_each do |photo| %>

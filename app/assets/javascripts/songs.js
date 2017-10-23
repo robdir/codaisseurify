@@ -1,12 +1,11 @@
 function createSong(name, album) {
   var newSong = { name: name, album: album };
-
-  var currentPath = window.href.location
+  var currentPath = window.location.pathname;
 
   $.ajax({
     type: "POST",
-    url: currentPath + "/songs",
-    data: JSON.stringify({
+    url: "/api" + currentPath + "/songs",
+      data: JSON.stringify({
       song: newSong
     }),
     contentType: "application/json",
@@ -16,7 +15,6 @@ function createSong(name, album) {
     console.log(data);
 
     var listId = data.id;
-
     var listItem = $("<li></li>")
       .attr('data-id', listId)
       .html(name, album);
@@ -33,11 +31,11 @@ function createSong(name, album) {
 
 function submitSong(event) {
   event.preventDefault();
-  var name = $("#new_song" "input[name=song[name]]").val();
-  var album = $("#new_song" "input[name=song[album]]").val();
-  createSong(name, album);
+  var name = $("#new_song" , "#song_name").val();
+  var album = $("#new_song" , "#song_album").val();
+  createSong();
   $("#new_song").val(null);
-}
+};
 
 $(document).ready(function() {
 $("#new_song").bind('submit', submitSong);
