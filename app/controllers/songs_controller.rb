@@ -17,7 +17,7 @@ def create
     if @song.save
       redirect_to @artist, notice: "Song added to this artist!"
      else
-       redirect_to @artist.id, notice: "Song could not be created :( )"
+       redirect_to @artist, notice: "Song could not be created :( )"
       end
    end
 

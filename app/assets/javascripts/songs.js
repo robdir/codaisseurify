@@ -2,8 +2,16 @@ function createSong(name, album) {
   var newSong = { name: name, album: album };
   var currentPath = window.location.pathname;
 
+  function submitSong(event) {
+    event.preventDefault();
+    var name = $("#new_song" , "#song_name").val();
+    var album = $("#new_song" , "#song_album").val();
+    createSong();
+    $("#new_song").val(null);
+
+
   $.ajax({
-    type: "POST",
+    method: "POST",
     url: "/api" + currentPath + "/songs",
       data: JSON.stringify({
       song: newSong
@@ -28,15 +36,8 @@ function createSong(name, album) {
   window.alert("Unable to create song.");
 });
 }
-
-function submitSong(event) {
-  event.preventDefault();
-  var name = $("#new_song" , "#song_name").val();
-  var album = $("#new_song" , "#song_album").val();
-  createSong();
-  $("#new_song").val(null);
 };
 
 $(document).ready(function() {
-$("#new_song").bind('submit', submitSong);
+$("#new_song").bind('submit', createSong);
 });
