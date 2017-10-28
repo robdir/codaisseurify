@@ -59,10 +59,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :development, :test do
   gem 'rspec-rails', '~> 3.5', '>= 3.5.2'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'capybara', '~> 2.9', '>= 2.9.1'
+  gem 'selenium-webdriver'
+  gem "chromedriver-helper"
 end
 
 group :test do
-  gem 'capybara', '~> 2.9', '>= 2.9.1'
+  gem 'database_cleaner'
 end
 
 gem 'active_model_serializers', '~> 0.10.0'
