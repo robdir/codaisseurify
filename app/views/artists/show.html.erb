@@ -21,12 +21,12 @@
 <br>
 <hr>
 <br>
+<br>
 <p> Add a new song to <%= "#{@artist.name}" %> </p>
 <br>
 <%= render "form" %>
 <br>
 <br>
-
 <hr>
 <%= link_to "[Not a fan of #{@artist.name}? Click here to delete them from our site.]",
 artist_path(@artist.id), method: :delete, data: { confirm: "Are you sure?!"} %>

@@ -8,7 +8,7 @@ class Api::SongsController < ApplicationController
 
   def create
     @artist = Artist.find(params[:artist_id])
-    @song = @artist.songs.new(song_params)
+    @song = @artist.songs.build(song_params)
 
      if @song.save
        render status: 200, json: @song
@@ -27,8 +27,17 @@ class Api::SongsController < ApplicationController
      render status: 200, json: {
        message: "Song deleted"
      }.to_json
-     redirect_to @artist
    end
+
+   def destroy_all
+    @artist = Artist.find(params[:artist_id])
+    @songs = artist.songs
+    songs.destroy_all
+
+    render status: 200, json: {
+      message: "All songs deleted!"
+    }.to_json
+  end
 
    private
 

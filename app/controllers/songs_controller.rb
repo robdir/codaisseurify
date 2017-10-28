@@ -11,21 +11,21 @@ def show
 end
 
 def create
-  @artist = Artist.find(params[:artist_id])
-   @song = @artist.songs.new(song_params)
-
-    if @song.save
-      redirect_to @artist, notice: "Song added to this artist!"
-     else
-       redirect_to @artist, notice: "Song could not be created :( )"
-      end
+  # @artist = Artist.find(params[:artist_id])
+  #  @song = @artist.songs.new(song_params)
+  #
+  #   if @song.save
+  #     redirect_to @artist, notice: "Song added to this artist!"
+  #    else
+  #      redirect_to @artist, notice: "Song could not be created :( )"
+  #     end
    end
 
  def destroy
-   @artist = Artist.find(params[:artist_id])
-   @song = Song.find(params[:id])
-   @song.destroy
-   redirect_to @artist
+  #  @artist = Artist.find(params[:artist_id])
+  #  @song = Song.find(params[:id])
+  #  @song.destroy
+  #  redirect_to root_path
  end
 
  private

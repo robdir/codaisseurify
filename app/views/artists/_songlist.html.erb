@@ -1,8 +1,10 @@
 <div class="all-songs", data-id="<%= @songs.ids%>">
   <ul class="song-list">
     <% @songs.each do |song, album| %>
-      <li class="song-list-each", data-id="<%= song.id %>"> "<%= song.name %>" -- "<%= song.album %>" <br> </li>
-      <%= link_to 'Delete', artist_song_path(@artist, song), method: :delete, data: { confirm: "Are you sure you want to delete this song?" } %>
+      <li class="song-list-each", data-id="<%= song.id %>"> "<%= song.name %>" -- "<%= song.album %>" <br>
+      <%= link_to 'Delete', artist_song_path(@artist, song), class: "delete-single", method: :delete  %> </li>
     <% end %>
+    <br>
   </ul>
+  <button class= "delete-all", method: :delete>  Click here to remove all songs.</button>
 </div>

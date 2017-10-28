@@ -1,43 +1,86 @@
-function createSong(name, album) {
-  var newSong = { name: name, album: album };
-  var currentPath = window.location.pathname;
+var currentPath = window.location.pathname;
 
-  function submitSong(event) {
-    event.preventDefault();
-    var name = $("#new_song" , "#song_name").val();
-    var album = $("#new_song" , "#song_album").val();
-    createSong();
-    $("#new_song").val(null);
+// this is the DOM that will have to happen to append the page - call in ajax success
+function createSongDOM(name, album, id) {
+  var liSong = $("<li></li>");
+  liSong.attr('data-id', id);
+  liSong.html("\"" + name + "\" -- \"" + album + "\"");
+  $('.song-list').append(liSong);
 
-
-  $.ajax({
-    method: "POST",
-    url: "/api" + currentPath + "/songs",
-      data: JSON.stringify({
-      song: newSong
-    }),
-    contentType: "application/json",
-    dataType: "json"
-  })
-  .done(function(data) {
-    console.log(data);
-
-    var listId = data.id;
-    var listItem = $("<li></li>")
-      .attr('data-id', listId)
-      .html(name, album);
-
-      $("#song-list").append(listItem);
-
-})
-
-.fail(function(error) {
-  console.log(error)
-  window.alert("Unable to create song.");
-});
+  var deleteLink = $('<a></a>');
+  deleteLink.html('Delete');
+  deleteLink.addClass('delete-single');
+  deleteLink.on('click', deleteSongAjax);
+  liSong.append($("<br/>"));
+  liSong.append(deleteLink);
 }
-};
+
+// communication with API_controller, posting required params
+function postSongAjax(event) {
+  event.preventDefault();
+  var inputField = $('#new_song');
+  var songName = $("#song_name").val();
+  var songAlbum = $("#song_album").val();
+  var newSong = { name: songName, album: songAlbum };
+    $.ajax({
+      method: "POST",
+      url: `/api` + currentPath + `/songs/`,
+        data: {
+        song: newSong
+      }
+    })
+    .done(function (data) {
+        createSongDOM(data.name, data.album, data.id);
+        $("#song_name").val(null);
+        $("#song_album").val(null);
+      }).fail(function(error) {
+        console.log(error)
+        window.alert("Unable to create song.");
+    });
+}
+
+
+// DOM that needs to occur to append HTML
+function deleteSongDOM(songId) {
+  $('[data-id =' + songId + ']').remove();
+}
+
+// communication with API for delete(single) request
+function deleteSongAjax(event) {
+  var liSong = $(event.target.parentElement);
+  var songId = liSong.attr('data-id');
+    $.ajax({
+      method: 'DELETE',
+      url: "/api" + currentPath + "/songs/" + songId,
+    }).success(function () {
+        deleteSongDOM(songId);
+   }).fail(function(error) {
+        console.log(error)
+        window.alert('Unable to delete song.');
+    });
+ }
+
+
+
+$(document).on('click', ".delete-all", function(){
+  var songLi = $(".song-list-each");
+  $.each($(songLi), function(){
+  var songId = $(this).attr('data-id');
+
+    $.ajax({
+      type: "DELETE",
+          url: `/api` + currentPath + `/songs/` + songId
+      }).success(function(){
+        $(this).remove();
+});
+});
+
+});
+
+
 
 $(document).ready(function() {
-$("#new_song").bind('submit', createSong);
+  $("#new_song").on('submit', postSongAjax);
+  $(".delete-single").on('click', deleteSongAjax);
+  // $(".delete-all").on('click', deleteAllAjax);
 });
