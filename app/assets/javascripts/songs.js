@@ -61,26 +61,23 @@ function deleteSongAjax(event) {
  }
 
 
-
+// delete-all loop
 $(document).on('click', ".delete-all", function(){
   var songLi = $(".song-list-each");
   $.each($(songLi), function(){
   var songId = $(this).attr('data-id');
-
     $.ajax({
       type: "DELETE",
           url: `/api` + currentPath + `/songs/` + songId
       }).success(function(){
-        $(this).remove();
+        $('[data-id =' + songId + ']').remove();
+    });
+  });
 });
-});
 
-});
-
-
-
+// event listeners
 $(document).ready(function() {
-  $("#new_song").on('submit', postSongAjax);
+  $("#new_song").bind('submit', postSongAjax);
   $(".delete-single").on('click', deleteSongAjax);
-  // $(".delete-all").on('click', deleteAllAjax);
 });
+
